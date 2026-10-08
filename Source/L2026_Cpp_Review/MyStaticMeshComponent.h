@@ -13,5 +13,14 @@ UCLASS()
 class L2026_CPP_REVIEW_API UMyStaticMeshComponent : public UStaticMeshComponent
 {
 	GENERATED_BODY()
+
+public:
+	UMyStaticMeshComponent();
+
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+		FActorComponentTickFunction* ThisTickFunction) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Speeds") float RotationSpeed = 7200.0f;
 	
+
 };
