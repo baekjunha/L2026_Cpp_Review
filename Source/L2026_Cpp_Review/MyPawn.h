@@ -6,9 +6,12 @@
 #include "GameFramework/Pawn.h"
 #include "MyPawn.generated.h"
 
+class UArrowComponent;
 class UBoxComponent;
 class UStaticMeshComponent;
-
+class USpringArmComponent;
+class UCameraComponent;
+class UFloatingPawnMovement;
 
 
 
@@ -23,8 +26,21 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	TObjectPtr<UBoxComponent> Box;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	TObjectPtr<UStaticMeshComponent> Body;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Componenets")
+	TObjectPtr<UArrowComponent> Arrow;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category ="Components")
+	TObjectPtr<USpringArmComponent> SpringArm;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category ="Components")
+	TObjectPtr<UCameraComponent> Camera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	TObjectPtr<UFloatingPawnMovement> Movement;
 
 protected:
 	// Called when the game starts or when spawned
