@@ -15,10 +15,10 @@ class L2026_CPP_REVIEW_API UMyStaticMeshComponent : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
-	UMyStaticMeshComponent();
+	UMyStaticMeshComponent(); //생성자
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-		FActorComponentTickFunction* ThisTickFunction) override;
+		FActorComponentTickFunction* ThisTickFunction) override; //재정의
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Speeds") float RotationSpeed = 7200.0f;
 	

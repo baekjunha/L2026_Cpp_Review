@@ -12,6 +12,8 @@ class UStaticMeshComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UFloatingPawnMovement;
+class UMyStaticMeshComponent;
+class AMyRocket;
 
 
 
@@ -41,6 +43,26 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	TObjectPtr<UFloatingPawnMovement> Movement;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category ="Components")
+	TObjectPtr<UMyStaticMeshComponent> Left;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category ="Components")
+	TObjectPtr<UMyStaticMeshComponent> Right;
+
+
+	//Fire() 함수 선언하기
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
+	//BP_MyRocket 같은 Blueprint 자식 클래스로 로켓을 발사할 것임.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TSubclassOf<AMyRocket> RocketTemplate;
+	
+	
+	
+
+
+
 
 protected:
 	// Called when the game starts or when spawned
