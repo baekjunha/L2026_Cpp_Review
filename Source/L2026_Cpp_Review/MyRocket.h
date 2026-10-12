@@ -10,6 +10,8 @@
 class UBoxComponent;
 class UStaticMeshComponent;
 class UProjectileMovementComponent;
+class UNiagaraSystem;
+class USoundBase;
 
 UCLASS()
 class L2026_CPP_REVIEW_API AMyRocket : public AActor
@@ -30,6 +32,21 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ProcessBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+	//나이아가라
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Effects")
+	TObjectPtr<UNiagaraSystem> ExplosionEffect;
+
+	//폭발 사운드
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	TObjectPtr<USoundBase> ExplosionSound;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CallCPPToExecuteBP();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void CallCPPToExecuteBPButDefaultCPP();
+	void CallCPPToExecuteBPButDefaultCPP_Implementation();
 
 protected:
 	// Called when the game starts or when spawned

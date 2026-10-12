@@ -5,6 +5,9 @@
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 
 // Sets default values
 AMyRocket::AMyRocket()
@@ -45,6 +48,7 @@ void AMyRocket::BeginPlay()
 		this,
 		&AMyRocket::ProcessBeginOverlap
 	);
+	SetLifeSpan(3.0f);
 		
 }
 
@@ -56,7 +60,22 @@ void AMyRocket::ProcessBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	if (OtherActor && !OtherActor->ActorHasTag(TEXT("Player")))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Rocket Overlap Detected"));
-	}
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
+		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), ExplosionSound, GetActorLocation());
+		UGameplayStatics::ApplyDamage(
+			OtherActor,
+			10.0f,
+			nullptr,
+			this,
+			UDamageType::StaticClass()
+		);
+
+		//CallCPPToExecuteBP();
+
+		CallCPPToExecuteBPButDefaultCPP();
+
+		Destroy();
+	}	
 }
 
 // Called every frame
@@ -66,3 +85,7 @@ void AMyRocket::Tick(float DeltaTime)
 
 }
 
+void AMyRocket::CallCPPToExecuteBPButDefaultCPP_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Default CPP Executed"));
+}
